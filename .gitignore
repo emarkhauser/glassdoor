@@ -1,2 +1,7 @@
 mvnw*
 .mvn/
+/bin
+/target
+.classpath
+.settings/
+.project
