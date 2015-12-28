@@ -22,11 +22,12 @@ public class GlassdoorController {
 	@RequestMapping("/employers")
 	public ArrayList<Employer> employers(
 			@RequestParam(value = "partnerId") String partnerId,
-			@RequestParam(value = "partnerKey") String partnerKey) {
+			@RequestParam(value = "partnerKey") String partnerKey,
+			@RequestParam(value = "location") String location) {
 		RestTemplate restTemplate = new RestTemplate();
 		CompanyResponse companyResponse = restTemplate.getForObject(
 				glassdoorUrlEmployerBase + "&t.p=" + partnerId + "&t.k="
-						+ partnerKey, CompanyResponse.class);
+						+ partnerKey + "&l=" + location, CompanyResponse.class);
 		return companyResponse.getResponse().getEmployers();
 	}
 
