@@ -2,7 +2,7 @@ var app = angular.module('glassdoor', []);
 
 app.controller('employersCtrl', function($scope, $http) {
 
-	$scope.baseUrl = "http://192.168.1.33:8080/glassdoor/employers";
+	$scope.baseUrl = "/employers";
 
 	$scope.submit = function() {
 		$scope.url = $scope.baseUrl + "?partnerId=" + $scope.partnerId
