@@ -1,6 +1,6 @@
 var app = angular.module('glassdoor', []);
 
-app.controller('employersCtrl', function($scope) {
+app.controller('employersCtrl', function($scope, $http) {
 
 	$scope.baseUrl = "http://192.168.1.33:8080/glassdoor/employers";
 
@@ -9,7 +9,7 @@ app.controller('employersCtrl', function($scope) {
 				+ "&partnerKey=" + $scope.partnerKey + "&location="
 				+ $scope.location;
 		$http.get($scope.url).success(function(response) {
-			$scope.companies = response.response.employers;
+			$scope.companies = response;
 		}).error(function(data, status) {
 			alert('failure');
 		});
