@@ -7,16 +7,31 @@ import ca.markhauser.model.Employer;
 
 public class EmployerService {
 
-        private String glassdoorApiUrl = "http://api.glassdoor.com/api/api.htm?&userip=0.0.0.0&useragent=&format=json";
-        private String glassdoorUrlEmployerBase = glassdoorApiUrl + "&v=1&action=employers";
+	private String glassdoorApiUrl = "http://api.glassdoor.com/api/api.htm?&userip=0.0.0.0&useragent=&format=json";
+	private String glassdoorUrlEmployerBase = glassdoorApiUrl
+			+ "&v=1&action=employers";
 
 	public EmployerService() {
 	}
 
-	public ArrayList<Employer> getEmployers(String partnerId, String partnerKey, String location) {
+	public ArrayList<Employer> getEmployers(String partnerId,
+			String partnerKey, String location) {
 		RestTemplate restTemplate = new RestTemplate();
-        	CompanyResponse companyResponse = restTemplate.getForObject(glassdoorUrlEmployerBase + "&t.p=" + partnerId + "&t.k=" + partnerKey + "&l=" + location, CompanyResponse.class);
-        	return companyResponse.getResponse().getEmployers();
+		ArrayList<Employer> employers = new ArrayList<Employer>();
+		int pageNumber = 0;
+		int currentPageNumber = 0;
+		int totalNumberOfPages = 0;
+		do {
+			pageNumber++;
+			CompanyResponse companyResponse = restTemplate.getForObject(
+					glassdoorUrlEmployerBase + "&t.p=" + partnerId + "&t.k="
+							+ partnerKey + "&l=" + location + "&pn="
+							+ pageNumber, CompanyResponse.class);
+			currentPageNumber = companyResponse.getResponse().getCurrentPageNumber();
+			totalNumberOfPages = companyResponse.getResponse().getTotalNumberOfPages();
+			employers.addAll(companyResponse.getResponse().getEmployers());
+		} while (currentPageNumber < totalNumberOfPages);
+		return employers;
 	}
 
 }
