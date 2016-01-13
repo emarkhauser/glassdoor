@@ -35,8 +35,9 @@ class='form-control'></div></div>
   </form>
   <table class='table table-bordered'>
     <tr ng-repeat="x in companies | orderBy:'-overallRating'">
-      <td>{{x.name}}</td>
+      <td><a href="{{x.website}}">{{x.name}}</a></td>
       <td>{{x.overallRating}}</td>
+      <td>{{x.numberOfRatings}}</td>
     </tr>
   </table>
   <a href="{{url}}">{{url}}</a> </div> 
