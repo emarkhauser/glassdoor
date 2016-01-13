@@ -1,6 +1,6 @@
 package ca.markhauser.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -10,7 +10,7 @@ public class Response {
 	int currentPageNumber;
     int totalNumberOfPages;
     int totalRecordCount;
-    ArrayList<Employer> employers;
+    LinkedList<Employer> employers;
 
 	public Response() {
 	}
@@ -39,11 +39,11 @@ public class Response {
 		this.totalRecordCount = totalRecordCount;
 	}
 
-	public ArrayList<Employer> getEmployers() {
+	public LinkedList<Employer> getEmployers() {
 		return employers;
 	}
 
-	public void setEmployers(ArrayList<Employer> employers) {
+	public void setEmployers(LinkedList<Employer> employers) {
 		this.employers = employers;
 	}
 
